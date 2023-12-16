@@ -6,14 +6,52 @@
     <title>Learning Vue</title>
     <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
     <style>
-        .box {
+        /* Importing Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Mulish:wght@400;500&family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@100;200;300;400;500;600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        /* Setting default font for all elements */
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+
+        p,
+        h3,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        li.fav {
+            background-color: #ff9ed2;
+            color: white;
+        }
+
+
+        /* .box {
             padding: 100px 0;
             width: 400px;
             text-align: center;
             background-color: #ddd;
             margin: 20px;
             display: inline-block;
-        }
+        } */
     </style>
 </head>
 
@@ -21,8 +59,20 @@
     <h1>Hello, Vue :)</h1>
 
     <div id="app">
+        <!-- attribute binding -->
+        <!-- <a v-bind:href="url" target="_blank">my website</a> -->
+        <br>
+        <!-- <p style="color: black;">{{ filteredBooks }}</p> -->
+        <br>
+
         <div v-if="showBooks">
-            <p>{{ title }} - {{ author }} - {{ age }}</p>
+            <ul>
+                <li v-for="book in filteredBooks" :class="{ fav: book.isFav }" @click="toggleFav(book)">
+                    <img :src="book.img" v-bind:alt="book.title">
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author }}</p>
+                </li>
+            </ul>
         </div>
 
         <button @click="toggleShowBooks">
@@ -34,10 +84,11 @@
         <br>
 
         <!-- mouse events -->
-        <div class="box" @mouseover="handleEvent">mouseover (enter)</div>
-        <div class="box" @mouseleave="handleEvent">mouseleave</div>
-        <div class="box" @dblclick="handleEvent">double click</div>
-        <div class="box"></div>
+        <!-- <div class="box" @mouseover="handleEvent($event, 'Mouse Over')">mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent($event, 'Mouse Leave')">mouseleave</div>
+        <div class="box" @dblclick="handleEvent($event)">double click</div>
+        <div class="box" @mousemove="handleMouseMove">mousemove<br>position: x = {{ x }}, y = {{ y }}</div> -->
+
 
         <!-- <div v-show="showBooks">currently showing books</div> -->
 
